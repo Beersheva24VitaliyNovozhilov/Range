@@ -50,15 +50,4 @@ public class BallBrokenFloor {
     public int getMinBrokenFloor() {
         return minBrokenFloor;
     }
-
-    /**
-     * Gets the number of floors.
-     * 
-     * Hope introducing this getter is acceptable...
-     * 
-     * @return the number of floors
-     */
-    public int getFloors() {
-        return nFloors;
-    }
 }

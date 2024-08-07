@@ -14,8 +14,8 @@ class BrokenFloorTest {
     // HW 14
     private int getMinBrokenFloor(BallBrokenFloor ballBrokenFloor) {
         int low = 1;
-        int high = ballBrokenFloor.getFloors();
-
+        int high = ballBrokenFloor.getMinBrokenFloor();
+        
         while (low <= high) {
             int mid = low + (high - low) / 2;
             try {
