@@ -5,6 +5,7 @@
 ## HWs/CWs
 
 * CW 14 - Exceptions
+* HW 18 - Iterator
 
 ## Contributing
 

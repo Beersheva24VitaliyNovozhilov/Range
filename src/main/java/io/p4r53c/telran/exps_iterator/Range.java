@@ -1,18 +1,20 @@
 package io.p4r53c.telran.exps_iterator;
 
+import java.util.Iterator;
+import java.util.NoSuchElementException;
+import java.util.function.Predicate;
+
 import io.p4r53c.telran.exps_iterator.exceptions.OutOfRangeMaxValueException;
 import io.p4r53c.telran.exps_iterator.exceptions.OutOfRangeMinValueException;
 
-/**
- * 
- * CW 14
- * 
- */
-public class Range {
+public class Range implements Iterable<Integer> {
 
     private static final String ERROR_MESSAGE = "Range: max must be greater than min";
+
     private int min;
     private int max;
+
+    private Predicate<Integer> predicate;
 
     private Range(int min, int max) {
         this.min = min;
@@ -33,6 +35,53 @@ public class Range {
 
         if (value < min) {
             throw new OutOfRangeMinValueException(min, value);
+        }
+    }
+
+    public void setPredicate(Predicate<Integer> predicate) {
+        this.predicate = predicate;
+    }
+
+    @Override
+    public Iterator<Integer> iterator() {
+        return new RangeIterator();
+    }
+
+    private class RangeIterator implements Iterator<Integer> {
+
+        int current;
+
+        public RangeIterator() {
+            current = findNextValid(min);
+        }
+
+        @Override
+        public boolean hasNext() {
+            return current < max;
+        }
+
+        @Override
+        public Integer next() {
+            if (!hasNext()) {
+                throw new NoSuchElementException();
+            }
+
+            Integer result = current;
+
+            current = findNextValid(current + 1); // Move to the next valid element.
+
+            return result;
+        }
+
+        private int findNextValid(int min) {
+            while (min < max) {
+                if (predicate == null || predicate.test(min)) {
+                    return min;
+                }
+                min++;
+            }
+
+            return max; // No more valid elements.
         }
     }
 }
