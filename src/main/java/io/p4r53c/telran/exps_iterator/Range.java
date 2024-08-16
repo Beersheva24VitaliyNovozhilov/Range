@@ -74,7 +74,7 @@ public class Range implements Iterable<Integer> {
         }
 
         private int findNextValid(int min) {
-            while (min < max) {
+            while (min <= max) {
                 if (predicate == null || predicate.test(min)) {
                     return min;
                 }
