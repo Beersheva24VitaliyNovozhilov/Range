@@ -57,7 +57,7 @@ public class Range implements Iterable<Integer> {
 
         @Override
         public boolean hasNext() {
-            return current < max;
+            return current <= max;
         }
 
         @Override
@@ -81,7 +81,7 @@ public class Range implements Iterable<Integer> {
                 min++;
             }
 
-            return max; // No more valid elements.
+            return min; // No more valid elements.
         }
     }
 }

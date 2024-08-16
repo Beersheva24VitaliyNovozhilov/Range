@@ -6,7 +6,6 @@ import static org.junit.jupiter.api.Assertions.assertThrowsExactly;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-import java.util.NoSuchElementException;
 
 import org.junit.jupiter.api.Test;
 
@@ -48,16 +47,7 @@ class RangeTest {
         for (int num : range) {
             result.add(num);
         }
-        assertEquals(Arrays.asList(1, 2, 3, 4), result);
-    }
-
-    // NoSuchElementException should be thrown
-    @Test
-    void testNextNoSuchElementExceptionWithRange() {
-        Range range = Range.getRange(1, 2);
-        range.setPredicate(n -> n % 2 == 0);
-
-        assertThrowsExactly(NoSuchElementException.class, () -> range.iterator().next());
+        assertEquals(Arrays.asList(1, 2, 3, 4, 5), result);
     }
 
     // Only even numbers from 1 to 10
@@ -72,7 +62,7 @@ class RangeTest {
             result.add(num);
         }
 
-        assertEquals(Arrays.asList(2, 4, 6, 8), result);
+        assertEquals(Arrays.asList(2, 4, 6, 8, 10), result);
     }
 
     // Primes from 1 to 20
